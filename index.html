@@ -59,7 +59,6 @@
       radial-gradient(ellipse 600px 300px at 50% 0%, rgba(77,163,255,.14), transparent 70%),
       var(--surface);
   }
-  [data-theme="dark"] .cert-status.progress{ background:rgba(245,185,66,.14); }
   h1,h2,h3,h4{ font-family:'Space Grotesk', sans-serif; font-weight:600; letter-spacing:-0.01em; }
   a{ color:inherit; text-decoration:none; }
   img{ max-width:100%; display:block; }
@@ -375,6 +374,22 @@
     color:var(--text-dimmer);
   }
   .project-body h3{ font-size:25px; margin-bottom:4px; }
+  .title-row{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+  .title-row h3{ margin-bottom:0; }
+  .store-links{ display:flex; gap:6px; }
+  .store-badge{
+    display:inline-flex; align-items:center; gap:5px;
+    background:#000; color:#fff;
+    padding:5px 9px; border-radius:7px;
+    border:1px solid rgba(255,255,255,.22);
+    font-family:'Inter', sans-serif;
+    transition:transform .18s ease, opacity .18s ease;
+  }
+  .store-badge:hover{ transform:translateY(-2px); opacity:.85; }
+  .store-badge svg{ flex-shrink:0; }
+  .store-badge-text{ display:flex; flex-direction:column; line-height:1.05; }
+  .store-badge-text .small{ font-size:7px; letter-spacing:.02em; opacity:.85; }
+  .store-badge-text .big{ font-size:11px; font-weight:600; }
   .project-role{ color:var(--accent); font-size:13.5px; font-weight:500; margin-bottom:16px; font-family:'JetBrains Mono', monospace;}
   .project-body ul{ list-style:none; margin:0 0 20px; display:flex; flex-direction:column; gap:9px; }
   .project-body li{
@@ -423,28 +438,27 @@
   .skill-pills .tag{ padding:8px 13px; }
 
   /* ---------- CERTS ---------- */
-  .certs{ display:flex; flex-wrap:wrap; gap:20px; }
+  .certs{
+    display:grid;
+    grid-template-columns: repeat(3, minmax(0,300px));
+    gap:20px;
+    justify-content:flex-start;
+  }
+  @media (max-width:820px){
+    .certs{ grid-template-columns: repeat(2, minmax(0,300px)); }
+  }
+  @media (max-width:560px){
+    .certs{ grid-template-columns: minmax(0,1fr); }
+  }
   .cert-card{
     background:var(--surface);
     border:1px solid var(--border);
     border-radius:16px;
     padding:22px;
     transition:border-color .2s ease, transform .2s ease;
-    flex:0 1 240px;
-    max-width:260px;
-  }
-  @media (max-width:420px){
-    .cert-card{ flex-basis:100%; max-width:100%; }
+    width:100%;
   }
   .cert-card:hover{ border-color:var(--accent); transform:translateY(-3px); }
-  .cert-status{
-    display:inline-flex; align-items:center; gap:6px;
-    font-family:'JetBrains Mono', monospace; font-size:10.5px;
-    padding:4px 9px; border-radius:99px;
-    margin-bottom:16px;
-  }
-  .cert-status.done{ background:var(--accent-soft); color:var(--accent); }
-  .cert-status.progress{ background:rgba(217,141,31,.12); color:var(--warn); }
   .cert-card h4{ font-size:16.5px; margin-bottom:6px; }
   .cert-card p{ color:var(--text-dimmer); font-size:13.5px; }
 
@@ -453,7 +467,7 @@
     aspect-ratio:auto;
     max-width:none;
     width:100%;
-    height:126px;
+    height:158px;
     margin-top:10px;
     border-radius:10px;
     border:1px solid var(--border);
@@ -461,12 +475,13 @@
   }
   .text-slide{
     min-width:100%; height:100%; flex-shrink:0;
-    padding:12px 16px;
+    padding:14px 14px;
     display:flex; flex-direction:column; justify-content:center;
+    box-sizing:border-box;
   }
-  .text-slide.title-slide{ align-items:flex-start; gap:5px; }
-  .text-slide.title-slide h4{
-    font-size:14px; line-height:1.22;
+  .learning-fixed-title{
+    font-size:14.5px;
+    line-height:1.3;
   }
   .learning-box-sub{
     font-family:'JetBrains Mono', monospace;
@@ -487,7 +502,7 @@
   }
   .text-slide li{
     position:relative; padding-left:13px;
-    color:var(--text-dim); font-size:10.5px; line-height:1.4;
+    color:var(--text-dim); font-size:11px; line-height:1.45;
   }
   .text-slide li::before{
     content:"";
@@ -672,7 +687,19 @@
           <span class="platform-badge">iOS &amp; Android</span>
           <span class="period">JAN 2026 – MAY 2026</span>
         </div>
-        <h3>Daleel Hayat Al Muslim</h3>
+        <div class="title-row">
+          <h3>Daleel Hayat Al Muslim</h3>
+          <div class="store-links">
+            <a href="https://apps.apple.com/jo/app/%D8%AF%D9%84%D9%8A%D9%84-%D8%AD%D9%8A%D8%A7%D8%A9-%D8%A7%D9%84%D9%85%D8%B3%D9%84%D9%85/id6472816228" target="_blank" rel="noopener" class="store-badge" aria-label="Download on the App Store">
+              <svg width="12" height="12" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+              <span class="store-badge-text"><span class="small">Download on the</span><span class="big">App Store</span></span>
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=mahdi.app.muslimlifeguide&hl=en_US" target="_blank" rel="noopener" class="store-badge" aria-label="Get it on Google Play">
+              <svg width="12" height="12" viewBox="0 0 512 512" fill="currentColor"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm401.4 214.5l-59.7-34.6-65.5 65.5 65.5 65.5 60.1-34.9c17.6-10.6 17.6-46.9-.4-61.5zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/></svg>
+              <span class="store-badge-text"><span class="small">GET IT ON</span><span class="big">Google Play</span></span>
+            </a>
+          </div>
+        </div>
         <div class="project-role">QA Engineer — Full Lifecycle Ownership</div>
         <ul>
           <li>Owned the complete QA lifecycle for a multi-feature Islamic lifestyle app across iOS and Android, from test planning through release validation.</li>
@@ -761,7 +788,19 @@
           <span class="platform-badge">iOS &amp; Android</span>
           <span class="period">SEP 2024 – APR 2025</span>
         </div>
-        <h3>KOFE App</h3>
+        <div class="title-row">
+          <h3>KOFE App</h3>
+          <div class="store-links">
+            <a href="https://apps.apple.com/jo/app/kofe/id6738706225" target="_blank" rel="noopener" class="store-badge" aria-label="Download on the App Store">
+              <svg width="12" height="12" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+              <span class="store-badge-text"><span class="small">Download on the</span><span class="big">App Store</span></span>
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.kofeapp&hl=en_US" target="_blank" rel="noopener" class="store-badge" aria-label="Get it on Google Play">
+              <svg width="12" height="12" viewBox="0 0 512 512" fill="currentColor"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm401.4 214.5l-59.7-34.6-65.5 65.5 65.5 65.5 60.1-34.9c17.6-10.6 17.6-46.9-.4-61.5zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/></svg>
+              <span class="store-badge-text"><span class="small">GET IT ON</span><span class="big">Google Play</span></span>
+            </a>
+          </div>
+        </div>
         <div class="project-role">QA Engineer — Ordering &amp; Payments</div>
         <ul>
           <li>Tested a mobile ordering and payment app end-to-end, from product selection to checkout.</li>
@@ -805,7 +844,19 @@
           <span class="platform-badge">iOS &amp; Android</span>
           <span class="period">MAY 2024 – JAN 2025</span>
         </div>
-        <h3>Studio HD</h3>
+        <div class="title-row">
+          <h3>Studio HD</h3>
+          <div class="store-links">
+            <a href="https://apps.apple.com/jo/app/studio-hd/id6473664481" target="_blank" rel="noopener" class="store-badge" aria-label="Download on the App Store">
+              <svg width="12" height="12" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+              <span class="store-badge-text"><span class="small">Download on the</span><span class="big">App Store</span></span>
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=mahdi.app.wallpapersfreehd&hl=en_US" target="_blank" rel="noopener" class="store-badge" aria-label="Get it on Google Play">
+              <svg width="12" height="12" viewBox="0 0 512 512" fill="currentColor"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm401.4 214.5l-59.7-34.6-65.5 65.5 65.5 65.5 60.1-34.9c17.6-10.6 17.6-46.9-.4-61.5zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/></svg>
+              <span class="store-badge-text"><span class="small">GET IT ON</span><span class="big">Google Play</span></span>
+            </a>
+          </div>
+        </div>
         <div class="project-role">QA Engineer — Media &amp; Content Library App</div>
         <ul>
           <li>Owned QA for a photo and video stock content app across Home, Category, Search, and Favorites modules.</li>
@@ -940,28 +991,21 @@
     </div>
     <div class="certs">
       <div class="cert-card">
-        <div class="cert-status progress">● In Progress</div>
         <h4>ISTQB — Foundation Level (CTFL)</h4>
         <p>Certified Tester, Foundation Level</p>
       </div>
       <div class="cert-card">
-        <div class="cert-status done">✓ Completed</div>
         <h4>QA Certification</h4>
         <p>Princess Sumaya University</p>
       </div>
       <div class="cert-card">
-        <div class="cert-status done">✓ Completed</div>
         <h4>B.A. Finance &amp; Banking</h4>
         <p>Al al-Bayt University</p>
       </div>
       <div class="cert-card learning-carousel-card">
-        <div class="cert-status done">✓ Completed</div>
+        <h4 class="learning-fixed-title">Agile Project Management with Jira Cloud <span class="learning-box-sub">— LinkedIn Learning</span></h4>
         <div class="carousel text-carousel" data-carousel>
           <div class="carousel-track">
-            <div class="text-slide title-slide">
-              <h4>Agile Project Management<br>with Jira Cloud</h4>
-              <span class="learning-box-sub">LinkedIn Learning</span>
-            </div>
             <div class="text-slide">
               <h5>1. Projects, Boards, and Issues</h5>
               <ul>
@@ -994,13 +1038,9 @@
       </div>
 
       <div class="cert-card learning-carousel-card">
-        <div class="cert-status done">✓ Completed</div>
+        <h4 class="learning-fixed-title">SQL &amp; Databases <span class="learning-box-sub">— LinkedIn Learning</span></h4>
         <div class="carousel text-carousel" data-carousel>
           <div class="carousel-track">
-            <div class="text-slide title-slide">
-              <h4>SQL &amp; Databases</h4>
-              <span class="learning-box-sub">LinkedIn Learning</span>
-            </div>
             <div class="text-slide">
               <h5>1. Programming Foundations: Databases</h5>
               <ul>
@@ -1118,7 +1158,7 @@
     const dotsWrap = carousel.querySelector('.carousel-dots');
     let index = 0;
     let autoplayTimer = null;
-    const AUTOPLAY_MS = 3800;
+    const AUTOPLAY_MS = carousel.classList.contains('text-carousel') ? 5200 : 3800;
 
     slides.forEach((_, i) => {
       const dot = document.createElement('span');
